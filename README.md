@@ -1,2 +1,2 @@
 # online
-Library application
+Library application. Please read this file before using.
