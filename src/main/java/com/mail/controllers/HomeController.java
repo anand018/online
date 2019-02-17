@@ -12,13 +12,12 @@ public class HomeController {
 	public void showHome(ModelMap map) {
 
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		map.addAttribute("user", user);
+		map.addAttribute("user", "welcome " + user);
 
 	}
 
 	@GetMapping("/admin-home.htm")
 	public String showAdminHome() {
-		
 		return "admin-home";
 	}
 }
