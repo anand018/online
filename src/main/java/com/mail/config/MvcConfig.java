@@ -1,5 +1,6 @@
 package com.mail.config;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.MessageSource;
 
 import org.springframework.context.annotation.Bean;
@@ -17,13 +18,21 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableWebMvc
 @ComponentScan("com.mail.controllers")
 public class MvcConfig extends WebMvcConfigurerAdapter {
+	Logger logger = Logger.getLogger(WebMvcConfigurerAdapter.class);
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
+		try {
+			/**
+			 * registry.addViewController("home.htm").setViewName("home");
+			 * registry.addViewController("admin-home.htm").setViewName("admin-home");
+			 */
+			registry.addViewController("login.htm").setViewName("login");
 
-		registry.addViewController("login.htm").setViewName("login");
-		// registry.addViewController("home.htm").setViewName("home");
-		// registry.addViewController("admin-home.htm").setViewName("admin-home");
+		} catch (Exception e) {
+			if (logger.isDebugEnabled())
+				logger.debug(e.getMessage());
+		}
 
 	}
 
@@ -48,8 +57,8 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver multiPartResolver = new CommonsMultipartResolver();
-		multiPartResolver.setMaxUploadSize(50971520); //  50 MB
-		multiPartResolver.setMaxInMemorySize(5048576); // 50 MB  
+		multiPartResolver.setMaxUploadSize(50971520); // 50 MB
+		multiPartResolver.setMaxInMemorySize(5048576); // 50 MB
 		return multiPartResolver;
 	}
 }
