@@ -1,13 +1,16 @@
 package com.mail.dao;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.mail.bo.AddBookBo;
+import com.main.exceptions.BookInsertionFailedException;
 
 @Repository
 public class AddBookDaoImpl implements AddBookDao {
+	Logger logger = Logger.getLogger(AddBookDaoImpl.class);
 
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
@@ -18,8 +21,10 @@ public class AddBookDaoImpl implements AddBookDao {
 		try {
 			hibernateTemplate.save(bookBo);
 		} catch (Exception e) {
-			e.printStackTrace();
-			// write logging
+			if (logger.isDebugEnabled())
+				logger.debug("failed to save book", e);
+			throw new BookInsertionFailedException();
+
 		}
 	}
 }
