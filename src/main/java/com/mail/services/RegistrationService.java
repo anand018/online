@@ -3,6 +3,7 @@ package com.mail.services;
 import java.sql.Timestamp;
 import java.util.UUID;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -17,7 +18,9 @@ import com.mail.dto.RegisterDto;
 import com.main.exceptions.RegistrationFailedException;
 
 @Service
-public class RegistrationService {
+public class RegistrationService implements IRegistrationService {
+	private static final Logger logger = Logger.getLogger(RegistrationService.class);
+
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	@Autowired
@@ -28,10 +31,14 @@ public class RegistrationService {
 	private MailSender mailSender;
 	@Autowired
 	private Environment env;
-	
+
+	@Override
 	public boolean registerUser(RegisterDto registerDto) {
 		RegistrationBo registrationBo;
 		registrationBo = new RegistrationBo();
+
+		if (logger.isInfoEnabled())
+			logger.info("Enter into registerUser method");
 
 		try {
 			if (registerDto.getPassword().equals(registerDto.getRePassword())) {
@@ -43,8 +50,13 @@ public class RegistrationService {
 				registrationBo.setPassword(encryptedPassword);
 
 				registrationDao.addUser(registrationBo);
-				
+
+				if (logger.isInfoEnabled())
+					logger.info("new user added successfully");
+
 				saveTimeStampAndSendMail(registerDto);
+				if (logger.isInfoEnabled())
+					logger.info("one varification mail has been sent successfully to user" + registerDto.getUsername());
 				return true;
 
 			} else {
@@ -52,10 +64,12 @@ public class RegistrationService {
 			}
 
 		} catch (RegistrationFailedException e) {
+			logger.error("Registration failed for user: " + registerDto.getUsername() + " " + e);
 			return false;
 		}
 	}
 
+	@Override
 	public void saveTimeStampAndSendMail(RegisterDto registerDto) {
 		String key = null;
 
@@ -65,13 +79,14 @@ public class RegistrationService {
 		key = UUID.randomUUID().toString();
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		registrationDao.saveTimeStamp(timestamp, key, registerDto.getUsername());
-		
-		String URL = env.getRequiredProperty("app.url") + key+"&"+"username="+registerDto.getUsername();
-		
+
+		String URL = env.getRequiredProperty("app.url") + key + "&" + "username=" + registerDto.getUsername();
+
 		mailMessage.setText("please click on above link to varify your account. \n \n " + URL);
 		mailSender.send(mailMessage);
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public boolean verify(RegistrationVerificationBo registrationVerificationBo) {
 		Timestamp originalTimeStamp = registrationDao.getTimeStamp(registrationVerificationBo.getKey());

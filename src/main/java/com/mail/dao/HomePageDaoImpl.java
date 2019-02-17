@@ -5,13 +5,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class HomePageDao {
-	
+public class HomePageDaoImpl implements HomePageDao {
+
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	@Override
 	public void getJoiningDate() {
-		
-		
+
 	}
 }

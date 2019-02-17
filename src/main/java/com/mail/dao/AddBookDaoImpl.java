@@ -10,7 +10,7 @@ import com.main.exceptions.BookInsertionFailedException;
 
 @Repository
 public class AddBookDaoImpl implements AddBookDao {
-	Logger logger = Logger.getLogger(AddBookDaoImpl.class);
+	private Logger logger = Logger.getLogger(AddBookDaoImpl.class);
 
 	@Autowired
 	private HibernateTemplate hibernateTemplate;

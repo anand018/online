@@ -1,10 +1,10 @@
 package com.mail.dao;
 
 import java.sql.Blob;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -33,13 +33,11 @@ public class ShowBooksDaoImpl implements ShowBooksDao {
 			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Blob img;
 				img = rs.getBlob("coverPage");
-				byte[] cover = img.getBytes(1,(int)img.length());
+				byte[] cover = img.getBytes(1, (int) img.length());
 				bookBo = new ShowBookBo();
 
-				System.out.println(cover + "..............................");
 				bookBo.setCover(cover);
 				covers.add(bookBo);
-				System.out.println(covers.get(0).getCover().toString() + "................................");
 				return bookBo;
 			}
 		});
