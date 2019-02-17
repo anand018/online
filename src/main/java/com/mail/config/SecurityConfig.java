@@ -44,13 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginProcessingUrl("/j_login").successHandler(successHnadler).and().logout().logoutUrl("/logout")
 				.logoutSuccessUrl("/home.htm");
 
-		/*
-		 * http.authorizeRequests().antMatchers("/home.htm").access(
-		 * "hasAuthority('customer')").and().formLogin()
-		 * .loginPage("/login.jsp").usernameParameter("username").passwordParameter(
-		 * "password");
-		 */
-
 		if (logger.isDebugEnabled())
 			logger.debug("Exit configure(HttpSecurity http) method");
 	}

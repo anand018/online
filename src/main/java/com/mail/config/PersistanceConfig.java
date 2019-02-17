@@ -39,7 +39,7 @@ public class PersistanceConfig {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource2());
-		sessionFactory.setPackagesToScan(new String[] { "com.websystique.spring.model" });
+		sessionFactory.setPackagesToScan("com.websystique.spring.model");
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		sessionFactory.setAnnotatedClasses(AddBookBo.class);
 		return sessionFactory;

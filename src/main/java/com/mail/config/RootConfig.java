@@ -17,6 +17,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.main.exceptions.RegistrationFailedException;
+
 @Configuration
 @ComponentScan("com.mail.dao, com.mail.services, com.mail.annotations")
 @PropertySource(value = { "classpath:application.properties" })
@@ -38,8 +40,7 @@ public class RootConfig {
 
 	@Bean
 	public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		return jdbcTemplate;
+		return new JdbcTemplate(dataSource);
 	}
 
 	@Bean
@@ -53,20 +54,30 @@ public class RootConfig {
 
 		props = new Properties();
 
-		props.setProperty("mail.smtp.auth", "true");
-		props.setProperty("mail.smtp.starttls.enable", "true");
+		try {
+			props.setProperty("mail.smtp.auth", "true");
+			props.setProperty("mail.smtp.starttls.enable", "true");
 
-		mailSender = new JavaMailSenderImpl();
-		mailSender.setHost("smtp.gmail.com");
-		mailSender.setPort(587);
-		mailSender.setUsername("anandpsingh7@gmail.com");
-		mailSender.setPassword("dyp34bs6519");
-		mailSender.setJavaMailProperties(props);
+			mailSender = new JavaMailSenderImpl();
+			mailSender.setHost("smtp.gmail.com");
+			mailSender.setPort(587);
+			mailSender.setUsername("anandpsingh7@gmail.com");
+			mailSender.setPassword("dyp34bs6519");
+			mailSender.setJavaMailProperties(props);
 
-		if (logger.isDebugEnabled())
-			logger.debug("Exit mailSender method");
+			if (logger.isDebugEnabled())
+				logger.debug("Exit mailSender method");
 
-		return mailSender;
+			return mailSender;
+		} catch (Exception e) {
+
+			if (logger.isDebugEnabled()) {
+				logger.error("Configuration problem ", e);
+			}
+
+			throw new RegistrationFailedException();
+
+		}
 	}
 
 	@Bean
