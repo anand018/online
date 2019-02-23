@@ -5,18 +5,18 @@ import javax.validation.constraints.NotBlank;
 
 public class BookForm {
 
-	@NotBlank
+	@NotBlank(message = "Title can not be empty")
 	private String title;
-	@NotBlank
+	@NotBlank(message = "Author can not be empty")
 	private String author;
-	@NotBlank
+	@NotBlank(message = "Edition can not be empty")
 	private String edition;
-	@NotBlank
+	@NotBlank(message = "Publisher can not be empty")
 	private String publisher;
 	@NotBlank
-	@Min(10)
+	@Min(value = 10, message = "ISBN must be greater than 10 digits")
 	private String isbn;
-	@NotBlank
+	@NotBlank(message = "Category can not be empty")
 	private String category;
 
 	public String getTitle() {

@@ -30,7 +30,6 @@ import com.mail.form.RegisterForm;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { RootConfig.class, MvcConfig.class, SecurityConfig.class, PersistanceConfig.class })
-
 public class RegistrationControllerTest {
 
 	@Autowired

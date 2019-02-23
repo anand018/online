@@ -15,7 +15,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = PasswordValidator.class)
 public @interface Password {
 
-	String message() default "weak password. password length should be greater than 5 characters";
+	String message() default "weak password";
 
 	Class<?>[] groups() default {};
 
