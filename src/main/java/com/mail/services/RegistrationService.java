@@ -64,7 +64,8 @@ public class RegistrationService implements IRegistrationService {
 			}
 
 		} catch (RegistrationFailedException e) {
-			logger.error("Registration failed for user: " + registerDto.getUsername() + " " + e);
+			logger.error(this.getClass().getSimpleName() + ": Registration failed for user: " + registerDto.getUsername()
+					+ " " + e);
 			return false;
 		}
 	}
