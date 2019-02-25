@@ -4,11 +4,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.mail.bo.AddBookBo;
 import com.mail.dao.AddBookDaoImpl;
 import com.mail.dto.AddBookDto;
-import com.main.exceptions.BookInsertionFailedException;
 
 @Service
 public class AddBookServiceImpl implements AddBookService {
