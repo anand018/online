@@ -20,28 +20,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.main.exceptions.RegistrationFailedException;
 
 @Configuration
-@ComponentScan("com.mail.dao, com.mail.services, com.mail.annotations")
+@ComponentScan("com.mail.dao, com.mail.services, com.mail.annotations, com.mail.config")
 @PropertySource(value = { "classpath:application.properties" })
 public class RootConfig {
 	private static final Logger logger = Logger.getLogger(RootConfig.class);
-
-	@Autowired
-	private Environment env;
-
-	@Bean
-	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName(env.getRequiredProperty("jdbc.driverClassName"));
-		dataSource.setUrl(env.getRequiredProperty("jdbc.url"));
-		dataSource.setUsername(env.getRequiredProperty("jdbc.username"));
-		dataSource.setPassword(env.getRequiredProperty("jdbc.password"));
-		return dataSource;
-	}
-
-	@Bean
-	public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-		return new JdbcTemplate(dataSource);
-	}
 
 	@Bean
 	public MailSender mailSender() {

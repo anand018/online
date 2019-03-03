@@ -2,7 +2,6 @@ package com.mail.config;
 
 import java.util.Properties;
 import javax.sql.DataSource;
-
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,14 +15,13 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 import com.mail.bo.AddBookBo;
 
 @Configuration
-@Profile("live")
+@Profile("test")
 @EnableTransactionManagement
 @PropertySource(value = { "classpath:application.properties" })
-public class PersistanceConfig {
+public class TestPersistanceConfig {
 
 	@Autowired
 	private Environment env;
@@ -34,10 +32,10 @@ public class PersistanceConfig {
 		dataSource.setDriverClassName(env.getRequiredProperty("jdbc.driverClassName"));
 		dataSource.setUsername(env.getRequiredProperty("jdbc.username"));
 		dataSource.setPassword(env.getRequiredProperty("jdbc.password"));
-		dataSource.setUrl(env.getRequiredProperty("jdbc.dev.url"));
+		dataSource.setUrl(env.getRequiredProperty("jdbc.test.url"));
 		return dataSource;
 	}
-
+	
 	@Bean
 	public JdbcTemplate jdbcTemplate(DataSource dataSource) {
 		return new JdbcTemplate(dataSource);

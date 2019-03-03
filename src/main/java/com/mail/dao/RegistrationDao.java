@@ -20,11 +20,11 @@ public class RegistrationDao implements IRegistrationDao {
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	MailSender mailSender;
-	private final static String REGISTER_USER = "INSERT INTO `udyog`.`users` (`first_name`, `last_name`, `username`, `password`, `role_name`, `gender`, `dob`, `status`, `email`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private final static String INSERT_KEY_AND_TIMESTAMP = "INSERT INTO `udyog`.`time` (`timestamp`, `key`, `username`) VALUES (?, ?, ?)";
-	private final static String GET_TIMESTAMP_FOR_KEY = "SELECT timestamp FROM udyog.time where `key`=?";
+	private final static String REGISTER_USER = "INSERT INTO `users` (`first_name`, `last_name`, `username`, `password`, `role_name`, `gender`, `dob`, `status`, `email`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private final static String INSERT_KEY_AND_TIMESTAMP = "INSERT INTO `time` (`timestamp`, `key`, `username`) VALUES (?, ?, ?)";
+	private final static String GET_TIMESTAMP_FOR_KEY = "SELECT timestamp FROM time where `key`=?";
 	private final String CHECK_USERNAME = "select username from users where username=?";
-	private final String UPDATE_USER_STATUS = "UPDATE `udyog`.`users` SET `status`='V' WHERE `username`=?";
+	private final String UPDATE_USER_STATUS = "UPDATE `users` SET `status`='V' WHERE `username`=?";
 
 	@Override
 	public void addUser(RegistrationBo registrationBo) {

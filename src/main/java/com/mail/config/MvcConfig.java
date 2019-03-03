@@ -14,19 +14,16 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+@SuppressWarnings("deprecation")
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.mail.controllers")
 public class MvcConfig extends WebMvcConfigurerAdapter {
-	Logger logger = Logger.getLogger(WebMvcConfigurerAdapter.class);
+	private static final Logger logger = Logger.getLogger(MvcConfig.class);
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		try {
-			/**
-			 * registry.addViewController("home.htm").setViewName("home");
-			 * registry.addViewController("admin-home.htm").setViewName("admin-home");
-			 */
 			registry.addViewController("login.htm").setViewName("login");
 
 		} catch (Exception e) {

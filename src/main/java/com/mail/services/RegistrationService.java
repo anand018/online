@@ -11,6 +11,8 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 import com.mail.bo.RegistrationBo;
 import com.mail.bo.RegistrationVerificationBo;
 import com.mail.dao.RegistrationDao;
@@ -18,6 +20,7 @@ import com.mail.dto.RegisterDto;
 import com.main.exceptions.RegistrationFailedException;
 
 @Service
+@EnableTransactionManagement
 public class RegistrationService implements IRegistrationService {
 	private static final Logger logger = Logger.getLogger(RegistrationService.class);
 
@@ -64,8 +67,8 @@ public class RegistrationService implements IRegistrationService {
 			}
 
 		} catch (RegistrationFailedException e) {
-			logger.error(this.getClass().getSimpleName() + ": Registration failed for user: " + registerDto.getUsername()
-					+ " " + e);
+			logger.error(this.getClass().getSimpleName() + ": Registration failed for user: "
+					+ registerDto.getUsername() + " " + e);
 			return false;
 		}
 	}
