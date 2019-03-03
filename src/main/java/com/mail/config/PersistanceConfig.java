@@ -1,6 +1,7 @@
 package com.mail.config;
 
 import java.util.Properties;
+
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
@@ -16,8 +17,7 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import com.mail.bo.AddBookBo;
+import com.mail.bo.BookBo;
 
 @Configuration
 @Profile("live")
@@ -49,7 +49,7 @@ public class PersistanceConfig {
 		sessionFactory.setDataSource(dataSource());
 		sessionFactory.setPackagesToScan("com.websystique.spring.model");
 		sessionFactory.setHibernateProperties(hibernateProperties());
-		sessionFactory.setAnnotatedClasses(AddBookBo.class);
+		sessionFactory.setAnnotatedClasses(BookBo.class);
 		return sessionFactory;
 	}
 

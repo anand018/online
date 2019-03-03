@@ -1,10 +1,9 @@
 package com.mail.dao;
 
 import java.util.ArrayList;
-
-import com.mail.bo.ShowBookBo;
+import com.mail.bo.BookBo;
 
 public interface ShowBooksDao {
 
-	public ArrayList<ShowBookBo> getBooksCover();
+	public ArrayList<BookBo> getBooksCover();
 }

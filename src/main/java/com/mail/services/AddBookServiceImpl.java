@@ -1,10 +1,11 @@
 package com.mail.services;
 
 import org.apache.log4j.Logger;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.mail.bo.AddBookBo;
+import com.mail.bo.BookBo;
 import com.mail.dao.AddBookDaoImpl;
 import com.mail.dto.AddBookDto;
 
@@ -18,9 +19,9 @@ public class AddBookServiceImpl implements AddBookService {
 	@Override
 	public boolean addBook(AddBookDto bookDto) {
 		boolean flag = false;
-		AddBookBo bookBo;
+		BookBo bookBo;
 
-		bookBo = new AddBookBo();
+		bookBo = new BookBo();
 
 		try {
 			if (logger.isInfoEnabled())

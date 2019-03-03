@@ -1,22 +1,27 @@
 package com.mail.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.mail.services.ShowBooksServiceImpl;
+import com.mail.dto.ShowBooksDto;
+import com.mail.services.ShowBooksService;
 
 @Controller
 public class ShowBooksController {
 
 	@Autowired
-	private ShowBooksServiceImpl serviceImpl;
+	private ShowBooksService serviceImpl;
 
 	@GetMapping("show-books.htm")
 	public void showBooks(ModelMap modelMap) {
-		modelMap.addAttribute("books", serviceImpl.showBooks());
-		System.out.println(serviceImpl.showBooks().get(1).getCovers().toString()+"...................");
-	}
 
+		List<ShowBooksDto> books = serviceImpl.showBooks();
+
+		modelMap.addAttribute("books", books);
+	}
 }

@@ -1,8 +1,8 @@
 package com.mail.dao;
 
-import com.mail.bo.AddBookBo;
+import com.mail.bo.BookBo;
 
 public interface AddBookDao {
 
-	public void saveBook(AddBookBo bookBo);
+	public void saveBook(BookBo bookBo);
 }

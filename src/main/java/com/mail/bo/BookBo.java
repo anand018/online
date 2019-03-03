@@ -1,5 +1,7 @@
 package com.mail.bo;
 
+import java.util.Arrays;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +13,8 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="books")
-public class AddBookBo {
+@Table(name = "books")
+public class BookBo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +42,7 @@ public class AddBookBo {
 	@Basic(fetch = FetchType.LAZY)
 	@Column(name = "coverPage", length = 100, nullable = false)
 	private byte[] coverPage;
-	
+
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	@Column(name = "originalBook", length = 100, nullable = false)
@@ -110,4 +112,11 @@ public class AddBookBo {
 		this.originalBook = originalBook;
 	}
 
+	@Override
+	public String toString() {
+		return "BookBo [id=" + id + ", title=" + title + ", author=" + author + ", edition=" + edition + ", publisher="
+				+ publisher + ", isbn=" + isbn + ", category=" + category + ", coverPage=" + Arrays.toString(coverPage)
+				+ ", originalBook=" + Arrays.toString(originalBook) + "]";
+	}
+	
 }
