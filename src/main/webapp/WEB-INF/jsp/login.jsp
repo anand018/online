@@ -5,7 +5,6 @@
 <head>
 <title>Login Page</title>
 <style>
-
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	background-color: blue;
@@ -66,8 +65,9 @@ a {
 </head>
 
 <body onload='document.f.username.focus();'>
-	<h2 align="left" style="font-family: sans-serif; color: white">HOWARD University Library</h2>
-		<div class="center">
+	<h2 align="left" style="font-family: sans-serif; color: white">HOWARD
+		University Library</h2>
+	<div class="center">
 		<div class="container">
 			<h3>Login with User Name and Password</h3>
 
@@ -80,14 +80,17 @@ a {
 					<tr>
 						<td>Password:</td>
 						<td><input type='password' name='password' /></td>
-						<td><input name="submit" type="submit"
-							value="Login" /></td>
+						<td><input name="submit" type="submit" value="Login" /></td>
+					</tr>
+					<tr>
+						<td>Remember Me:</td>
+						<td><input type="checkbox" name="remember-me" /></td>
 					</tr>
 					<input name="_csrf" type="hidden"
 						value="0befb410-4e62-4e85-b914-a341579ead67" />
 				</table>
 			</form>
 		</div>
-		</div>
+	</div>
 </body>
 </html>

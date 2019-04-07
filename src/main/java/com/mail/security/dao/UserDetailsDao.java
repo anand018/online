@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -20,11 +22,12 @@ public class UserDetailsDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	private String role;
+	private static Logger LOGGER = Logger.getLogger(UserDetailsDao.class);
 
 	private final String USER_DETAILS = "select username, password, role_name from users where username=?";
 
 	public UserDetails getUserDetails(String username) {
-		
+
 		GrantedAuthority authority = new GrantedAuthority() {
 			private static final long serialVersionUID = -5140801952377636840L;
 
@@ -49,10 +52,15 @@ public class UserDetailsDao {
 
 					authorities.add(authority);
 					details.setAuthorities(authorities);
+
+					if (LOGGER.isDebugEnabled())
+						LOGGER.debug("Returning to Authentication Manager");
 					return details;
 				}
 			}, username);
 		} catch (Exception e) {
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug(e);
 			throw new BadCredentialsException("Your usermane or password is incorrect");
 		}
 	}
