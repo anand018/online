@@ -1,21 +1,20 @@
 package com.mail.dto;
 
 import java.io.Serializable;
-import java.util.Arrays;
 
 public class ShowBooksDto implements Serializable {
 
 	private static final long serialVersionUID = -5603244217712345023L;
-	private byte[] covers;
+	private String covers;
 	private String title;
 	private String publisher;
 	private String edition;
 
-	public byte[] getCovers() {
+	public String getCovers() {
 		return covers;
 	}
 
-	public void setCovers(byte[] covers) {
+	public void setCovers(String covers) {
 		this.covers = covers;
 	}
 
@@ -45,12 +44,6 @@ public class ShowBooksDto implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	@Override
-	public String toString() {
-		return "ShowBooksDto [covers=" + Arrays.toString(covers) + ", title=" + title + ", publisher=" + publisher
-				+ ", edition=" + edition + "]";
 	}
 
 }

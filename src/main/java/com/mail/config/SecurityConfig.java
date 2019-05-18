@@ -34,10 +34,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			logger.debug("Enter into configure(HttpSecurity http) method");
 
 		http.csrf().disable();
+		/*
 		http.authorizeRequests().antMatchers("/user.htm", "/home.htm").hasAuthority("customer").and().formLogin()
 				.loginPage("/login.htm").usernameParameter("username").passwordParameter("password")
 				.loginProcessingUrl("/j_login").successHandler(successHnadler).and().logout().logoutUrl("/logout")
 				.logoutSuccessUrl("/home.htm").deleteCookies("JSESSIONID").and().rememberMe().key("uniqueAndSecret");
+				
+		*/
 
 		http.authorizeRequests().antMatchers("/save-book.htm").hasAuthority("admin").and().formLogin()
 				.loginPage("/login.htm").usernameParameter("username").passwordParameter("password")
