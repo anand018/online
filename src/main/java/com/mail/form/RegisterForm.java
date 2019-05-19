@@ -20,7 +20,6 @@ public class RegisterForm implements Serializable {
 	@NotBlank
 	private String dob;
 	@NotBlank
-
 	@Username
 	private String username;
 	@NotBlank

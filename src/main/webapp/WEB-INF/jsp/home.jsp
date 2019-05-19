@@ -27,11 +27,11 @@
 		<p style="font-family: sans-serif; size: 20px">Welcome to HOWARD
 			Library</p>
 
-		<p>
-			<a href="${pageContext.request.contextPath}/login.htm">Click here
-				to login</a> <a href="${pageContext.request.contextPath}/register.htm">Click
-				here to register</a>
-		</p>
+		
+			<a href="${pageContext.request.contextPath}/login.htm">Login
+				</a> 
+				<p>    </p>
+				<a href="${pageContext.request.contextPath}/register.htm">Register</a>
 
 		<h3 style="color: red">AVAILABLE BOOKS</h3>
 		<table align="center">
