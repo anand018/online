@@ -9,9 +9,16 @@ public class HomePageDaoImpl implements HomePageDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	private static final String GETCUSTOMERFIRSTNAME = "SELECT first_name from users WHERE username = ?";
+
+	@Override
+	public String getCustomerFirstName(String username) {
+		return jdbcTemplate.queryForObject(GETCUSTOMERFIRSTNAME, String.class, username);
+	}
 
 	@Override
 	public void getJoiningDate() {
 
 	}
+
 }

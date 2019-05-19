@@ -12,12 +12,13 @@
 <body>
 	<h2 align="left" style="font-family: sans-serif;">HOWARD</h2>
 
-	<h2 align="right"><% 
-	
-	if(request.getAttribute("user") != null)
-	out.print(request.getAttribute("user"));
-	
-	%></h2>
+	<h2 align="right">
+		<%
+			if (request.getAttribute("user") != null)
+				out.print(request.getAttribute("user"));
+		%>
+	</h2>
+
 
 	<a href="${pageContext.request.contextPath}/logout">Logout</a>
 
@@ -31,18 +32,15 @@
 				to login</a> <a href="${pageContext.request.contextPath}/register.htm">Click
 				here to register</a>
 		</p>
-	
+
 		<h3 style="color: red">AVAILABLE BOOKS</h3>
 		<table align="center">
 			<tr>
 				<c:forEach var="book" items="${books}">
-					<tr>
-						<td><img alt="img" height="300" width="200"
-							src="data:image/jpeg;base64,${book.covers}" /></td>
-					</tr>
-					<tr align="center">
-						<td>${book.publisher}</td>
-					</tr>
+
+					<td align="center"><img alt="img" height="300" width="200"
+						src="data:image/jpeg;base64,${book.covers}" /> ${book.publisher}</td>
+
 				</c:forEach>
 			</tr>
 		</table>
