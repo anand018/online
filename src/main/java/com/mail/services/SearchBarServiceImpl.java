@@ -6,22 +6,21 @@ import java.util.ArrayList;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.mail.bo.BookBo;
-import com.mail.dao.ShowBooksDao;
+import com.mail.dao.SearchBarDAO;
 import com.mail.dto.ShowBooksDto;
 
 @Service
-public class ShowBooksServiceImpl implements ShowBooksService {
+public class SearchBarServiceImpl implements SearchBarService{
 
 	@Autowired
-	private ShowBooksDao showBooks;
-
+	SearchBarDAO searchBarDAO;
+	
 	@Override
-	@Transactional(readOnly = true)
-	public ArrayList<ShowBooksDto> showBooks() {
-		ArrayList<BookBo> bookBos = showBooks.getBooksCover();
+	public ArrayList<ShowBooksDto> getBooksFromQuery(String query) {
+	
+		ArrayList<BookBo> bookBos = searchBarDAO.getBooksFromQuery(query);
 		ArrayList<ShowBooksDto> booksDtos = new ArrayList<>();
 
 		for (BookBo bo : bookBos) {
@@ -42,5 +41,4 @@ public class ShowBooksServiceImpl implements ShowBooksService {
 
 		return booksDtos;
 	}
-
 }

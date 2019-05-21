@@ -63,6 +63,8 @@ public class RegistrationService implements IRegistrationService {
 				return true;
 
 			} else {
+				logger.error(this.getClass().getSimpleName() + ": Registration failed for user: "
+						+ registerDto.getUsername());
 				return false;
 			}
 

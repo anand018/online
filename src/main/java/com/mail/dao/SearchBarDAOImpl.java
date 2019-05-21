@@ -4,29 +4,27 @@ import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+
 import com.mail.bo.BookBo;
 
 @Repository
-public class ShowBooksDaoImpl implements ShowBooksDao {
+public class SearchBarDAOImpl implements SearchBarDAO {
 
 	@Autowired
-	HibernateTemplate hibernateTemplate;
-	@Autowired
 	JdbcTemplate jdbcTemplate;
-	private static final String GET_BOOKS = "SELECT author, coverPage, publisher, title, edition FROM books";
+	private static final String GET_BOOKS = "SELECT author, coverPage, publisher, title, edition FROM books where author=? or title=? or publisher=?";
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<BookBo> getBooksCover() { 
+	public ArrayList<BookBo> getBooksFromQuery(String query) {
 		ArrayList<BookBo> bookBos;
 
-		return (ArrayList<BookBo>) jdbcTemplate.query(GET_BOOKS, new RowMapper() {
+		return (ArrayList<BookBo>) jdbcTemplate.query(GET_BOOKS, new Object[] { query, query, query }, new RowMapper() {
 			ArrayList<BookBo> covers = new ArrayList<>();
 
 			@Override
@@ -45,5 +43,5 @@ public class ShowBooksDaoImpl implements ShowBooksDao {
 			}
 		});
 	}
-}
 
+}
